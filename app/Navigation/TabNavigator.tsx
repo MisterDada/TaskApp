@@ -9,7 +9,7 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}  >
         
-      <Tab.Screen name="Home" component={Index} />
+      <Tab.Screen name="Home" component={Index} /> 
       <Tab.Screen name="Create Task" component={createTask} /> 
     </Tab.Navigator>
   );

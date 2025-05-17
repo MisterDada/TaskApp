@@ -5,7 +5,6 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import { useState } from "react";
 import useTaskStore from "../Features/Store";
@@ -30,6 +29,7 @@ const createTask = () => {
       addTask({
         id: Date.now(),
         title: taskName,
+        completed: false
       });
       setTaskName("");
     }

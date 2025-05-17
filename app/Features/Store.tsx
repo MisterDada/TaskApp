@@ -1,16 +1,18 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type Task = {
   id: number;
   title: string;
+  completed: boolean;
 };
 
 type TaskStore = {
   tasks: Task[];
   addTask: (task: Task) => void;
   deleteTask: (id: number) => void;
+  completeTask: (id: number) => void;
 };
 
 const useTaskStore = create<TaskStore>()(
@@ -19,15 +21,20 @@ const useTaskStore = create<TaskStore>()(
       tasks: [],
       addTask: (task) =>
         set((state) => ({
-          tasks: [...state.tasks, task],
+          tasks: [...state.tasks, { ...task, completed: false }],
         })),
       deleteTask: (id) =>
         set((state) => ({
           tasks: state.tasks.filter((task) => task.id !== id),
         })),
+      completeTask: (id) =>
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id ? { ...task, completed: true } : task),
+        })),
     }),
     {
-      name: 'task-storage', // 🧠 Key for storage
+      name: "task-storage", // 🧠 Key for storage
       storage: {
         getItem: async (name) => {
           const value = await AsyncStorage.getItem(name);

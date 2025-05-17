@@ -6,18 +6,22 @@ import {
   ScrollView,
   Image
 } from "react-native";
-import React from "react";
-import Tasks from "../Features/Tasks";
-import LottieView from "lottie-react-native";
+import React, { useMemo, useState } from "react";
+import Tasks from "./Tasks";
+import CompletedTasks from "./Complete";
+import LottieView from 'lottie-react-native';
 
 const Index = () => {
+
+  const [selectedTab, setSelectedTab] = useState<'tasks' | 'completed'>('tasks');
+
   const date = new Date();
   const hours = date.getHours();
-  const minutes = date.getMinutes();
-  let timeOfDay;
+  let minutes: any = date.getMinutes();
+  let timeOfDay: string;
   let greeting;
   if (hours < 12) {
-    timeOfDay = "Morning";
+    timeOfDay = "Morning";``
     greeting = "Ready to plan your day?";
   } else if (hours >= 12 && hours < 17) {
     timeOfDay = "Afternoon";
@@ -26,7 +30,38 @@ const Index = () => {
     timeOfDay = "Evening";
     greeting = "Hope you had a great day!";
   }
+
   console.log(timeOfDay);
+
+  if(minutes < 10){
+    minutes = `${0}${minutes}` ;
+  }
+
+
+  // Set the animation source based on the time of day
+  // Use useMemo to memoize the animation source
+  // This prevents unnecessary re-renders and improves performance
+
+    const animationSource = useMemo(() => {
+  if (timeOfDay === "Morning") {
+    return require('../../assets/Animation - 1747331179559.json');
+  } else if (timeOfDay === "Afternoon") {
+    return require('../../assets/icons8-sun.json');
+  } else {
+    return require('../../assets/Animation - 1747331000730.json');
+  }
+}, [timeOfDay]);
+
+
+  // function to render tasks and completed tasks
+  const renderTasks = () => {
+    if (selectedTab === 'completed') {
+      return <CompletedTasks />;
+    }
+    return <Tasks />;
+  }
+
+
 
   return (
     <View style={styles.main}>
@@ -36,8 +71,8 @@ const Index = () => {
         <Text style={styles.greeting}>{greeting}</Text>
         </View>
         <View style={{justifyContent: 'center', flexDirection: 'row', alignItems: 'center'}}>
-          <LottieView
-        source={require('../assets/icons8-sun.json')}
+      <LottieView
+        source={animationSource}
         autoPlay
         loop
         style={{ width: 50, height: 50 }}
@@ -46,19 +81,21 @@ const Index = () => {
         </View>
       </View>
       <View style={styles.tabs}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setSelectedTab('tasks')} >
           <View style={styles.tabStyles}>
             <Text style={styles.Text}>My Tasks</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity  onPress={() => setSelectedTab('completed')} >
           <View style={styles.tabStyles}>
             <Text style={styles.Text}>Completed</Text>
           </View>
         </TouchableOpacity>
       </View>
       <View style={styles.tasks}>
-        <Tasks />
+        <ScrollView>
+          {renderTasks()}
+        </ScrollView>
       </View>
     </View>
   );
