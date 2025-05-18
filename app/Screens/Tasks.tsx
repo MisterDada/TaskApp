@@ -10,9 +10,7 @@ import useTaskStore from "../Features/Store";
 
 const Tasks = () => {
   const tasks = useTaskStore((state) => state.tasks);
-
   const deleteTask = useTaskStore((state) => state.deleteTask);
-
   const completeTask = useTaskStore((state) => state.completeTask);
 
   return (
@@ -37,7 +35,7 @@ const Tasks = () => {
             <Text style={{ color: "black", fontSize: 18, textAlign: "center" }}>
               {task.title}
             </Text>
-            <View style={{flexDirection: 'row', gap: 10}} >
+            <View style={{ flexDirection: "row", gap: 10 }}>
               <TouchableOpacity
                 onPress={() => deleteTask(task.id)}
                 style={{ backgroundColor: "red", padding: 10, borderRadius: 5 }}

@@ -31,6 +31,8 @@ const useTaskStore = create<TaskStore>()(
         set((state) => ({
           tasks: state.tasks.map((task) =>
             task.id === id ? { ...task, completed: true } : task),
+          // Filter out completed tasks if needed
+          tasks: state.tasks.filter((task) => !task.completed),
         })),
     }),
     {

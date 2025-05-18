@@ -57,8 +57,10 @@ const Index = () => {
   const renderTasks = () => {
     if (selectedTab === 'completed') {
       return <CompletedTasks />;
-    }
+    }else if (selectedTab === 'tasks') {
     return <Tasks />;
+    }
+    return null;
   }
 
 
