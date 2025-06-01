@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
-import useTaskStore from "../Features/Store";
+import {useTaskStore } from "../Features/Store";
+import { Icon } from "react-native-elements";
 
 const Tasks = () => {
   const tasks = useTaskStore((state) => state.tasks);
@@ -35,18 +36,19 @@ const Tasks = () => {
             <Text style={{ color: "black", fontSize: 18, textAlign: "center" }}>
               {task.title}
             </Text>
-            <View style={{ flexDirection: "row", gap: 10 }}>
+            <View style={{ flexDirection: "row" }}>
               <TouchableOpacity
                 onPress={() => deleteTask(task.id)}
-                style={{ backgroundColor: "red", padding: 10, borderRadius: 5 }}
+                style={{padding: 10, borderRadius: 5 }}
               >
-                <Text style={{ color: "white" }}>Delete</Text>
+                <Icon name="trash" type="ionicon" color="black" />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => completeTask(task.id)}
-                style={{ backgroundColor: "red", padding: 10, borderRadius: 5 }}
+                style={{ padding: 10, borderRadius: 5 }}
               >
-                <Text style={{ color: "white" }}>Complete</Text>
+                {/* <Text style={{ color: "white" }}>Complete</Text> */}
+                <Icon name="checkbox" type="ionicon" color="black" />
               </TouchableOpacity>
             </View>
           </View>

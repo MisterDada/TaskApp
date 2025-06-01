@@ -1,14 +1,18 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import React from 'react'
-import useTaskStore from '../Features/Store'
+import {useCompletedTaskStore} from '../Features/Store'
 
 const Complete = () => {
 
-  const completedTasks = useTaskStore((state) => state.tasks);
+  const completedTasks = useCompletedTaskStore((state) => state.completedTasks);
+
 
   return (
     <View>
-      <Text>Complete</Text>
+      <View style={{ justifyContent: "center", alignItems: "center"}}>
+        <Text style={{ fontSize: 25, padding: 20 }}>Completed Tasks</Text>
+      </View>
+      
       <ScrollView style={{ padding: 20, paddingHorizontal: 0 }}>
         {completedTasks.map((task) => (
           <View

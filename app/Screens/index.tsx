@@ -31,8 +31,6 @@ const Index = () => {
     greeting = "Hope you had a great day!";
   }
 
-  console.log(timeOfDay);
-
   if(minutes < 10){
     minutes = `${0}${minutes}` ;
   }
@@ -77,7 +75,7 @@ const Index = () => {
         source={animationSource}
         autoPlay
         loop
-        style={{ width: 50, height: 50 }}
+        style={{ width: 100, height: 50 }}
       />
           <Text style={{fontSize: 25}} >{hours}:{minutes}</Text>
         </View>
@@ -88,11 +86,11 @@ const Index = () => {
             <Text style={styles.Text}>My Tasks</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity  onPress={() => setSelectedTab('completed')} >
+        {/* <TouchableOpacity  onPress={() => setSelectedTab('completed')} >
           <View style={styles.tabStyles}>
             <Text style={styles.Text}>Completed</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={styles.tasks}>
         <ScrollView>

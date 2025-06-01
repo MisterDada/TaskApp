@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
-import useTaskStore from "../Features/Store";
+import {useTaskStore} from "../Features/Store";
 import React from "react";
 
 const createTask = () => {
