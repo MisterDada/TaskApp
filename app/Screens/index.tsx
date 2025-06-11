@@ -6,7 +6,7 @@ import {
   ScrollView,
   Image
 } from "react-native";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Tasks from "./Tasks";
 import CompletedTasks from "./Complete";
 import LottieView from 'lottie-react-native';
@@ -14,8 +14,18 @@ import LottieView from 'lottie-react-native';
 const Index = () => {
 
   const [selectedTab, setSelectedTab] = useState<'tasks' | 'completed'>('tasks');
+  const [date, setDate] = useState(new Date());
 
-  const date = new Date();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDate(new Date());
+    }, 60000);
+    return () => clearInterval(interval)
+  }, []);
+
+
+  
   const hours = date.getHours();
   let minutes: any = date.getMinutes();
   let timeOfDay: string;
