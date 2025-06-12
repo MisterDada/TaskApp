@@ -83,8 +83,8 @@ const Index = () => {
         <View style={{justifyContent: 'center', flexDirection: 'row', alignItems: 'center'}}>
       <LottieView
         source={animationSource}
-        autoPlay
-        loop
+        autoPlay = {false}
+        loop = {false}
         style={{ width: 100, height: 50 }}
       />
           <Text style={{fontSize: 25}} >{hours}:{minutes}</Text>
